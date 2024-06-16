@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Local apps
+    'app_types',
+    'app_users',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +84,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'host': os.getenv('APP_DB_HOST'),
-            'database': os.getenv('APP_DB_NAME'),
-            'user': os.getenv('APP_DB_USER'),
-            'password': os.getenv('APP_DB_PASSWORD'),
+            'host': 'localhost', #os.getenv('APP_DB_HOST'),
+            'database': 'juego_cartas', #os.getenv('APP_DB_NAME'),
+            'user': 'root', #os.getenv('APP_DB_USER'),
+            'password': 'abc',#os.getenv('APP_DB_PASSWORD'),
         },
     }
 }
@@ -124,16 +127,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATICFILES_BASE_DIR = BASE_DIR/'static'
-STATICFILES_DIRS = [
-    STATICFILES_BASE_DIR,
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
-# STATIC_ROOT = STATICFILES_BASE_DIR
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
+
 
 
 # Default primary key field type
