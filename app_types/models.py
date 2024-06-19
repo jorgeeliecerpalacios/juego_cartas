@@ -15,7 +15,7 @@ class Types(models.Model):
 
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, choices=NAME_CHOICE)
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to='types/photos')
 
