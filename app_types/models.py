@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Types(models.Model):
     """Types model."""
 
-    NAME_CHOICE=(
+    NAME_CHOICE = (
         ('baraja', 'Naipes'),#52
         ('cartas', 'Uno'),#112
         ('tarjetas', 'Golpe'),#110
