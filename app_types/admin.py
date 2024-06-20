@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from app_types.models import Types
+from app_types.models import Type
 
 
 class TypesAdmin(admin.ModelAdmin):
@@ -23,7 +23,7 @@ class TypesAdmin(admin.ModelAdmin):
         'modified'
     )
     fieldsets = (
-        ('Type', {
+        ('Types', {
             'fields': (('name', 'photo'),),
         }),
         ('Extra info', {
@@ -39,4 +39,4 @@ class TypesAdmin(admin.ModelAdmin):
     readonly_fields = ('created', 'modified',)
 
 
-admin.site.register(Types)
+admin.site.register(Type)
