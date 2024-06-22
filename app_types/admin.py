@@ -2,15 +2,70 @@ from django.contrib import admin
 
 # Register your models here.
 
-from app_types.models import Type
+from app_types.models import Type, Challange
 
 
-class TypesAdmin(admin.ModelAdmin):
-    # Profile admin.
-
-    list_display = ('pk', 'name', 'description', 'quantity', 'photo')
+@admin.register(Challange)
+class ChallengeAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'name', 'description', 'dificult')
     list_display_links = ('pk', 'name',)
-    list_editable = ('description', 'quantity', 'photo')
+    list_editable = ('description', 'dificult')
+
+    search_fields = (
+        'name',
+        'pk',
+        'dificult',
+        'description'
+    )
+
+    list_filter = (
+        'created',
+        'modified'
+    )
+    fieldsets = (
+        ('Challenge', {
+            'fields': [
+                ('name'), 
+                ('description')
+                ]
+            }),
+        ('Extra info', {
+            'fields': [
+                ('dificult')
+                ]
+        }),
+        ('Metadata', {
+            'fields': (('created', 'modified'),),
+        })
+    )
+
+    readonly_fields = ('created', 'modified',)
+    save_on_top = True
+
+
+# class TypesInline(admin.StackedInline):
+#     model = Type
+#     can_delete = False
+#     verbose_name_plural = 'types'
+#     save_on_top = True
+
+
+class ChallengeInline(admin.TabularInline):
+    model = Challange
+    can_delete = False
+    verbose_name_plural = 'challanges'
+    save_on_top = True
+
+
+@admin.register(Type)
+class TypesAdmin(admin.ModelAdmin):
+    # Type admin.
+
+    inlines = [ChallengeInline]
+
+    list_display = ('pk', 'name', 'quantity', 'photo')
+    list_display_links = ('pk', 'name',)
+    list_editable = [('quantity')]
 
     search_fields = (
         'name',
@@ -23,20 +78,24 @@ class TypesAdmin(admin.ModelAdmin):
         'modified'
     )
     fieldsets = (
-        ('Types', {
-            'fields': (('name', 'photo'),),
+        ('Type', {
+            'fields': [
+                ('name'), ('photo')
+                ]
         }),
         ('Extra info', {
-            'fields': (
-                ('name', 'description')
-            )
+            'fields': [('quantity')]
+                
         }),
         ('Metadata', {
-            'fields': (('created', 'modified'),),
+            'fields': (('created', 'modified')),
         })
     )
 
     readonly_fields = ('created', 'modified',)
+    save_on_top = True
 
 
-admin.site.register(Type)
+# admin.site.register(Challange)
+
+# admin.site.register(Type)

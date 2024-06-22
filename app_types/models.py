@@ -8,9 +8,9 @@ class Type(models.Model):
     """Types model."""
 
     NAME_CHOICE = (
-        ('baraja', 'Naipes'),#52
-        ('cartas', 'Uno'),#112
-        ('tarjetas', 'Golpe'),#110
+        ('Naipes', 'Naipes'),#52
+        ('Uno', 'Uno'),#112
+        ('Golpe', 'Golpe'),#110
     )
 
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -31,13 +31,14 @@ class Type(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        """Return title and username."""
-        return f'{(self.name)} | {(self.description)} | {(self.created)} | {(self.modified)}'
+        """Return name, description, created and modified."""
+        return f'{(self.name)} | {(self.created)} | {(self.modified)}'
+
 
 class Challange(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    # juego = models.ForeignKey(JuegoDeCartas, on_delete=models.CASCADE)
+    types = models.OneToOneField(Type, on_delete=models.CASCADE)
     dificult = models.IntegerField(
         validators=[
             MinValueValidator(1),  # Dificultad mínima
@@ -46,9 +47,7 @@ class Challange(models.Model):
     )
     # created = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     created = models.DateTimeField(auto_now_add=True)
-    fecha_limite = models.DateTimeField()
-    premio = models.CharField(max_length=100)
-    # Otros campos relevantes para el reto
+    modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.name} - {self.description}'
+        return f'{(self.name)} | {(self.description)} | {(self.created)} | {(self.modified)}'
