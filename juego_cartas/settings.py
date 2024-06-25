@@ -83,11 +83,12 @@ WSGI_APPLICATION = 'juego_cartas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+   
         'OPTIONS': {
-            'host': 'localhost', #os.getenv('APP_DB_HOST'),
-            'database': 'juego_cartas', #os.getenv('APP_DB_NAME'),
-            'user': 'root', #os.getenv('APP_DB_USER'),
-            'password': 'abc',#os.getenv('APP_DB_PASSWORD'),
+            'host': os.getenv('APP_DB_HOST'),
+            'database': os.getenv('APP_DB_NAME'),
+            'user': os.getenv('APP_DB_USER'),
+            'password': os.getenv('APP_DB_PASSWORD'),
         },
     }
 }

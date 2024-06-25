@@ -20,10 +20,10 @@ class Type(models.Model):
     photo = models.ImageField(upload_to='types/photos')
 
     quantity = models.IntegerField(
-        default = 0,
+        default=0,
         validators=[
             MinValueValidator(0),
-            MaxValueValidator(100)
+            MaxValueValidator(200)
             ]
         )
 
