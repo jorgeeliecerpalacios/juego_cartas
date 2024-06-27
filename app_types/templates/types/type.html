@@ -1,0 +1,25 @@
+
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+  <h1 >RETOS DE CARTAS</h1>
+    
+    <div class="content">
+      <div class="types-card">
+        {% for type in object_list %}
+        <a href="">
+          <div class="card">
+            <img src="{{ type.photo.url }}" alt="Imagen de {{type.name}}">
+            <div class="textos">
+              <h3>{{ type.name }}</h3>
+              <p>27 de Octubre 2021</p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock content %}
+
+  
