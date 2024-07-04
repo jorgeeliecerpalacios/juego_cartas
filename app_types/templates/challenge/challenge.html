@@ -1,0 +1,30 @@
+
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+
+<h1>RETOS</h1>
+<nav class="d-flex justify-content-center" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'types:types' %}">Home</a></li>
+    <li class="breadcrumb-item active"style="color:white;" aria-current="page">Retos</li>
+  </ol>
+</nav>
+
+
+  <div class="content">
+    <ul class="challenge-list">
+      {% for challenge in challenge %}
+        <li class="challenge-item">
+          {#<img src="{{ challenge.types.photo.url }}" alt="Imagen de {{ challenge.name }}">#}          <div class="textos">
+            <h2>{{ challenge.name }}</h2>
+            <p>{{ challenge.description }}</p>
+            <!-- Otros campos relevantes del desafío -->
+
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock content %}

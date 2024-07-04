@@ -12,4 +12,10 @@ urlpatterns = [
     view=views.TypeListView.as_view(),
     name='types'
     ),
+
+    path(
+    route='challenge/<int:type_id>/',
+    view=views.ChallengeListView.as_view(),
+    name='challenges'
+    ),
 ]

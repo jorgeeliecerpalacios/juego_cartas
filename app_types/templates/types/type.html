@@ -8,7 +8,8 @@
     <div class="content">
       <div class="types-card">
         {% for type in object_list %}
-        <a href="">
+        <a href="{% url 'types:challenges' type.id %}">
+          {#<!-- {% url 'projects:project_home' project.id%} -->#}
           <div class="card">
             <img src="{{ type.photo.url }}" alt="Imagen de {{type.name}}">
             <div class="textos">
