@@ -38,7 +38,7 @@ class Type(models.Model):
 class Challange(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    types = models.OneToOneField(Type, on_delete=models.CASCADE)
+    types = models.ForeignKey(Type, on_delete=models.CASCADE, related_name="challenges")
     dificult = models.IntegerField(
         validators=[
             MinValueValidator(1),  # Dificultad mínima
@@ -50,4 +50,4 @@ class Challange(models.Model):
     modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{(self.name)} | {(self.description)} | {(self.created)} | {(self.modified)}'
+        return f'{(self.name)} | {(self.description)} | {(self.types.name)} | {(self.created)} | {(self.modified)}'

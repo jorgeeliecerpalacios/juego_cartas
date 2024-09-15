@@ -7,7 +7,7 @@ from app_types.models import Type, Challange
 
 @admin.register(Challange)
 class ChallengeAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'description', 'dificult')
+    list_display = ('pk', 'name', 'description', 'dificult', 'types')
     list_display_links = ('pk', 'name',)
     list_editable = ('description', 'dificult')
 
@@ -15,19 +15,22 @@ class ChallengeAdmin(admin.ModelAdmin):
         'name',
         'pk',
         'dificult',
-        'description'
+        'description',
+        'types__name',
     )
 
     list_filter = (
         'created',
-        'modified'
+        'modified',
+        'types'
     )
     fieldsets = (
         ('Challenge', {
             'fields': [
-                ('name'), 
-                ('description')
-                ]
+                ('name'),
+                ('description'),
+                ('types')
+            ]
             }),
         ('Extra info', {
             'fields': [
@@ -43,15 +46,9 @@ class ChallengeAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-# class TypesInline(admin.StackedInline):
-#     model = Type
-#     can_delete = False
-#     verbose_name_plural = 'types'
-#     save_on_top = True
-
-
 class ChallengeInline(admin.TabularInline):
     model = Challange
+    extra = 1
     can_delete = False
     verbose_name_plural = 'challanges'
     save_on_top = True
